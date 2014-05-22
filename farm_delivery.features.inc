@@ -15,6 +15,13 @@ function farm_delivery_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function farm_delivery_views_api() {
+  return array("version" => "3.0");
+}
+
+/**
  * Implements hook_default_log_type().
  */
 function farm_delivery_default_log_type() {
