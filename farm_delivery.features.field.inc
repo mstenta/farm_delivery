@@ -85,82 +85,6 @@ function farm_delivery_field_default_fields() {
     ),
   );
 
-  // Exported field: 'log-farm_delivery-field_farm_csa_order'.
-  $fields['log-farm_delivery-field_farm_csa_order'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_farm_csa_order',
-      'foreign keys' => array(
-        'commerce_order' => array(
-          'columns' => array(
-            'target_id' => 'order_id',
-          ),
-          'table' => 'commerce_order',
-        ),
-      ),
-      'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'entityreference',
-      'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'commerce_order' => 'commerce_order',
-          ),
-        ),
-        'target_type' => 'commerce_order',
-      ),
-      'translatable' => '0',
-      'type' => 'entityreference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'farm_delivery',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'inline',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => 1,
-          ),
-          'type' => 'entityreference_label',
-          'weight' => '2',
-        ),
-      ),
-      'entity_type' => 'log',
-      'field_name' => 'field_farm_csa_order',
-      'label' => 'Order',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '2',
-      ),
-    ),
-  );
-
   // Exported field: 'log-farm_delivery-field_farm_date'.
   $fields['log-farm_delivery-field_farm_date'] = array(
     'field_config' => array(
@@ -366,6 +290,86 @@ function farm_delivery_field_default_fields() {
     ),
   );
 
+  // Exported field: 'log-farm_delivery-field_farm_orders'.
+  $fields['log-farm_delivery-field_farm_orders'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_farm_orders',
+      'foreign keys' => array(
+        'commerce_order' => array(
+          'columns' => array(
+            'target_id' => 'order_id',
+          ),
+          'table' => 'commerce_order',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'commerce_order' => 'commerce_order',
+          ),
+        ),
+        'target_type' => 'commerce_order',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'farm_delivery',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'inline',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => 1,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => '3',
+        ),
+      ),
+      'entity_type' => 'log',
+      'field_name' => 'field_farm_orders',
+      'label' => 'Orders',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete_tags',
+        'weight' => '3',
+      ),
+    ),
+  );
+
   // Exported field: 'log-farm_delivery-field_farm_pickup_location'.
   $fields['log-farm_delivery-field_farm_pickup_location'] = array(
     'field_config' => array(
@@ -447,7 +451,7 @@ function farm_delivery_field_default_fields() {
   t('Address');
   t('Date');
   t('Notes');
-  t('Order');
+  t('Orders');
   t('Pickup Location');
   t('Status');
 
