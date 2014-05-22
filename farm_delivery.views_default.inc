@@ -192,7 +192,6 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['id'] = 'field_farm_pickup_location_target_id';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['table'] = 'field_data_field_farm_pickup_location';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['field'] = 'field_farm_pickup_location_target_id';
-  $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['operator'] = 'in';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['group'] = 1;
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['operator_id'] = 'field_farm_pickup_location_target_id_op';
