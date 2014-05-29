@@ -1,7 +1,82 @@
 <?php
 /**
  * @file
- * Code for the Farm Delivery feature.
+ * Code for the Farm Delivery module.
  */
 
 include_once 'farm_delivery.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function farm_delivery_menu() {
+  $items = array();
+
+  $items['admin/farm/deliveries/generate'] = array(
+    'title' => 'Generate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('farm_delivery_generate_form'),
+    'access callback' => 'log_access',
+    'access arguments' => array('create'),
+    'file' => 'farm_delivery.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_farm_delivery_generate().
+ */
+function farm_delivery_farm_delivery_order_items($form_state) {
+
+  // Start an empty deliveries array.
+  $deliveries = array();
+
+  // Get the cutoff date.
+  $cutoff = strtotime($form_state['values']['since']);
+
+  // Load all completed orders that were created after the cutoff.
+  $orders = array();
+  $query = db_select('commerce_order', 'co');
+  $query->addField('co', 'order_id');
+  $query->condition('status', 'completed');
+  $query->condition('created', $cutoff, '>');
+  $result = $query->execute();
+  foreach ($result as $order) {
+    $orders[$order->order_id] = commerce_order_load($order->order_id);
+  }
+
+  // Iterate through the orders...
+  foreach ($orders as $order) {
+
+    // Load the line items.
+    foreach ($order->commerce_line_items[LANGUAGE_NONE] as $line_item) {
+      $line_item_ids[] = $line_item['line_item_id'];
+    }
+    $line_items = commerce_line_item_load_multiple($line_item_ids);
+
+    // Add each item to the delivery.
+    foreach ($line_items as $line_item) {
+
+      // If the line item is not a product, skip it.
+      if ($line_item->type != 'product') {
+        continue;
+      }
+
+      // Load the product.
+      $product = commerce_product_load($line_item->commerce_product[LANGUAGE_NONE][0]['product_id']);
+
+      // If the product isn't just a simple old every day product, skip it.
+      if ($product->type != 'product') {
+        continue;
+      }
+
+      $deliveries[$order->order_id][] = $line_item->quantity . ' ' . $product->title;
+    }
+  }
+
+  // Return the deliveries.
+  return $deliveries;
+}
