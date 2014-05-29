@@ -75,10 +75,11 @@ function farm_delivery_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Change status',
+      'label' => 'Update Date/Status',
       'settings' => array(
-        'show_all_tokens' => 1,
+        'show_all_tokens' => 0,
         'display_values' => array(
+          'farm_delivery::field_farm_date' => 'farm_delivery::field_farm_date',
           'farm_delivery::field_farm_delivery_status' => 'farm_delivery::field_farm_delivery_status',
         ),
       ),
