@@ -213,12 +213,16 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['id'] = 'field_farm_delivery_status_value';
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['table'] = 'field_data_field_farm_delivery_status';
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['field'] = 'field_farm_delivery_status_value';
+  $handler->display->display_options['filters']['field_farm_delivery_status_value']['value'] = array(
+    'pending' => 'pending',
+  );
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['group'] = 1;
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['operator_id'] = 'field_farm_delivery_status_value_op';
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['operator'] = 'field_farm_delivery_status_value_op';
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['identifier'] = 'field_farm_delivery_status_value';
+  $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
