@@ -60,6 +60,28 @@ function farm_delivery_generate_form($form, &$form_state) {
 }
 
 /**
+ * Validation function for the generate deliveries form.
+ */
+function farm_delivery_generate_form_validate($form, &$form_state) {
+
+  // Convert dates to a unix timestamps.
+  $delivery_date = strtotime($form_state['values']['date']);
+  $since_date = strtotime($form_state['values']['since']);
+
+  // Deliveries must be made in the future.
+  $today = strtotime(date('Y-m-d'));
+  if ($delivery_date < $today) {
+    form_set_error('date', t('Deliveries cannot be made in the past.'));
+  }
+
+  // Do not allow deliveries for orders over 60 days old (as a performance precaution).
+  $cutoff = REQUEST_TIME - 60 * 60 * 24 * 60;
+  if ($since_date < $cutoff) {
+    form_set_error('since', t('Only orders created in the past 60 days can be used to generate deliveries.'));
+  }
+}
+
+/**
  * Submit function for the generate deliveries form.
  */
 function farm_delivery_generate_form_submit($form, &$form_state) {
