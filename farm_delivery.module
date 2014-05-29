@@ -48,6 +48,11 @@ function farm_delivery_farm_delivery_order_items($form_state) {
     $orders[$order->order_id] = commerce_order_load($order->order_id);
   }
 
+  // Display a warning if no orders were found.
+  if (empty($orders)) {
+    drupal_set_message('No recent completed orders were found.', 'warning');
+  }
+
   // Iterate through the orders...
   foreach ($orders as $order) {
 
