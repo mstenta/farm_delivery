@@ -196,14 +196,6 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['fields']['field_farm_delivery_items']['field'] = 'field_farm_delivery_items';
   $handler->display->display_options['fields']['field_farm_delivery_items']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_farm_delivery_items']['multi_type'] = 'ul';
-  /* Field: Log: Orders */
-  $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
   /* Field: Log: Pickup Location */
   $handler->display->display_options['fields']['field_farm_pickup_location']['id'] = 'field_farm_pickup_location';
   $handler->display->display_options['fields']['field_farm_pickup_location']['table'] = 'field_data_field_farm_pickup_location';
@@ -222,10 +214,14 @@ function farm_delivery_views_default_views() {
       'address' => 'address',
     ),
   );
-  /* Field: Log: Notes */
-  $handler->display->display_options['fields']['field_farm_notes']['id'] = 'field_farm_notes';
-  $handler->display->display_options['fields']['field_farm_notes']['table'] = 'field_data_field_farm_notes';
-  $handler->display->display_options['fields']['field_farm_notes']['field'] = 'field_farm_notes';
+  /* Field: Log: Orders */
+  $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
   /* Field: Log: Status */
   $handler->display->display_options['fields']['field_farm_delivery_status']['id'] = 'field_farm_delivery_status';
   $handler->display->display_options['fields']['field_farm_delivery_status']['table'] = 'field_data_field_farm_delivery_status';
@@ -270,6 +266,27 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['operator'] = 'field_farm_pickup_location_target_id_op';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['identifier'] = 'field_farm_pickup_location_target_id';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    30037204 => 0,
+    200153887 => 0,
+    125843996 => 0,
+    173712484 => 0,
+    196317508 => 0,
+    146437786 => 0,
+  );
+  /* Filter criterion: Log: Orders (field_farm_orders:delta) */
+  $handler->display->display_options['filters']['delta']['id'] = 'delta';
+  $handler->display->display_options['filters']['delta']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['filters']['delta']['field'] = 'delta';
+  $handler->display->display_options['filters']['delta']['group'] = 1;
+  $handler->display->display_options['filters']['delta']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['delta']['expose']['operator_id'] = 'delta_op';
+  $handler->display->display_options['filters']['delta']['expose']['label'] = 'Orders #';
+  $handler->display->display_options['filters']['delta']['expose']['description'] = 'Enter a specific order number.';
+  $handler->display->display_options['filters']['delta']['expose']['operator'] = 'delta_op';
+  $handler->display->display_options['filters']['delta']['expose']['identifier'] = 'delta';
+  $handler->display->display_options['filters']['delta']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     30037204 => 0,
