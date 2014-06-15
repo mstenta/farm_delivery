@@ -25,7 +25,7 @@ function farm_delivery_openlayers_maps() {
     'hide_empty_map' => 0,
     'center' => array(
       'initial' => array(
-        'centerpoint' => '-95.99999999999764, 40.00000000000016',
+        'centerpoint' => '-95.9765624899946, 39.90973623405987',
         'zoom' => '4',
       ),
       'restrict' => array(
@@ -34,6 +34,37 @@ function farm_delivery_openlayers_maps() {
       ),
     ),
     'behaviors' => array(
+      'openlayers_behavior_cluster' => array(
+        'clusterlayer' => array(
+          'farm_deliveries_openlayers_1' => 'farm_deliveries_openlayers_1',
+        ),
+        'distance' => '20',
+        'threshold' => '',
+        'display_cluster_numbers' => 1,
+        'middle_lower_bound' => '15',
+        'middle_upper_bound' => '50',
+        'low_color' => 'rgb(141, 203, 61)',
+        'low_stroke_color' => 'rgb(141, 203, 61)',
+        'low_opacity' => '0.8',
+        'low_point_radius' => '10',
+        'low_label_outline' => '1',
+        'middle_color' => 'rgb(49, 190, 145)',
+        'middle_stroke_color' => 'rgb(49, 190, 145)',
+        'middle_opacity' => '0.8',
+        'middle_point_radius' => '16',
+        'middle_label_outline' => '1',
+        'high_color' => 'rgb(35, 59, 177)',
+        'high_stroke_color' => 'rgb(35, 59, 177)',
+        'high_opacity' => '0.8',
+        'high_point_radius' => '22',
+        'high_label_outline' => '1',
+        'label_low_color' => '#000000',
+        'label_low_opacity' => '0.8',
+        'label_middle_color' => '#000000',
+        'label_middle_opacity' => '0.8',
+        'label_high_color' => '#000000',
+        'label_high_opacity' => '0.8',
+      ),
       'openlayers_behavior_fullscreen' => array(
         'activated' => 0,
       ),
@@ -61,6 +92,8 @@ function farm_delivery_openlayers_maps() {
         ),
         'panMapIfOutOfView' => 1,
         'keepInMap' => 1,
+        'zoomToPoint' => 0,
+        'zoomToCluster' => 0,
       ),
       'openlayers_behavior_scaleline' => array(),
       'openlayers_behavior_zoomtolayer' => array(
