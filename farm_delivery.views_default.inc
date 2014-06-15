@@ -219,6 +219,15 @@ function farm_delivery_views_default_views() {
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
+  /* Field: Commerce Order: Line items */
+  $handler->display->display_options['fields']['commerce_line_items']['id'] = 'commerce_line_items';
+  $handler->display->display_options['fields']['commerce_line_items']['table'] = 'field_data_commerce_line_items';
+  $handler->display->display_options['fields']['commerce_line_items']['field'] = 'commerce_line_items';
+  $handler->display->display_options['fields']['commerce_line_items']['relationship'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['fields']['commerce_line_items']['settings'] = array(
+    'view' => 'commerce_line_item_table|default',
+  );
+  $handler->display->display_options['fields']['commerce_line_items']['delta_offset'] = '0';
   /* Field: Log: Status */
   $handler->display->display_options['fields']['field_farm_delivery_status']['id'] = 'field_farm_delivery_status';
   $handler->display->display_options['fields']['field_farm_delivery_status']['table'] = 'field_data_field_farm_delivery_status';
