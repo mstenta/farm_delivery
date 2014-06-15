@@ -5,6 +5,7 @@ package = Farm
 dependencies[] = addressfield
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = date_views
 dependencies[] = entity
 dependencies[] = entityreference
 dependencies[] = features

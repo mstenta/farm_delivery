@@ -29,6 +29,7 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -36,10 +37,9 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'id' => 'id',
     'views_bulk_operations' => 'views_bulk_operations',
+    'id' => 'id',
     'field_farm_date' => 'field_farm_date',
-    'field_farm_delivery_items' => 'field_farm_delivery_items',
     'field_farm_pickup_location' => 'field_farm_pickup_location',
     'field_farm_address' => 'field_farm_address',
     'field_farm_orders' => 'field_farm_orders',
@@ -47,14 +47,14 @@ function farm_delivery_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = 'field_farm_date';
   $handler->display->display_options['style_options']['info'] = array(
-    'id' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'views_bulk_operations' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'views_bulk_operations' => array(
+    'id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -62,11 +62,6 @@ function farm_delivery_views_default_views() {
     'field_farm_date' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_farm_delivery_items' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -99,30 +94,17 @@ function farm_delivery_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['empty_table'] = TRUE;
-  /* Header: Global: Unfiltered text */
-  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['header']['area_text_custom']['content'] = 'To generate a list of deliveries based on completed orders in the system, use the <a href="/admin/farm/deliveries/generate">Generate Deliveries</a> form.
-
-<ul>
-  <li>Delivery status and date can be changed by selecting the deliveries below and clicking "Change Date/Status".</li>
-  <li>Deliveries can be deleted by selecting them below and clicking "Delete".</li>
-</ul>
-
-You may narrow down the list of deliveries using the fields below. Click "Apply" to apply the filter.';
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No deliveries were found that match the criteria above.';
-  /* Field: Log: Log ID */
-  $handler->display->display_options['fields']['id']['id'] = 'id';
-  $handler->display->display_options['fields']['id']['table'] = 'log';
-  $handler->display->display_options['fields']['id']['field'] = 'id';
-  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_farm_orders_target_id']['id'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['relationships']['field_farm_orders_target_id']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['relationships']['field_farm_orders_target_id']['field'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['relationships']['field_farm_orders_target_id']['label'] = 'Commerce Order';
   /* Field: Bulk operations: Log */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'log';
@@ -191,6 +173,13 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
       'label' => '',
     ),
   );
+  /* Field: Log: Log ID */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'log';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'ID';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'log/[id]';
   /* Field: Log: Date */
   $handler->display->display_options['fields']['field_farm_date']['id'] = 'field_farm_date';
   $handler->display->display_options['fields']['field_farm_date']['table'] = 'field_data_field_farm_date';
@@ -203,12 +192,6 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
     'multiple_to' => '',
     'show_repeat_rule' => 'show',
   );
-  /* Field: Log: Items */
-  $handler->display->display_options['fields']['field_farm_delivery_items']['id'] = 'field_farm_delivery_items';
-  $handler->display->display_options['fields']['field_farm_delivery_items']['table'] = 'field_data_field_farm_delivery_items';
-  $handler->display->display_options['fields']['field_farm_delivery_items']['field'] = 'field_farm_delivery_items';
-  $handler->display->display_options['fields']['field_farm_delivery_items']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_farm_delivery_items']['multi_type'] = 'ul';
   /* Field: Log: Pickup Location */
   $handler->display->display_options['fields']['field_farm_pickup_location']['id'] = 'field_farm_pickup_location';
   $handler->display->display_options['fields']['field_farm_pickup_location']['table'] = 'field_data_field_farm_pickup_location';
@@ -231,6 +214,7 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
   $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
   $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['label'] = 'Order';
   $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
     'link' => 1,
   );
@@ -255,6 +239,7 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['filters']['field_farm_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_farm_date_value']['expose']['operator_id'] = 'field_farm_date_value_op';
   $handler->display->display_options['filters']['field_farm_date_value']['expose']['label'] = 'Date';
+  $handler->display->display_options['filters']['field_farm_date_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_farm_date_value']['expose']['operator'] = 'field_farm_date_value_op';
   $handler->display->display_options['filters']['field_farm_date_value']['expose']['identifier'] = 'field_farm_date_value';
   $handler->display->display_options['filters']['field_farm_date_value']['expose']['remember_roles'] = array(
@@ -278,6 +263,7 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['label'] = 'Pickup Location';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['operator'] = 'field_farm_pickup_location_target_id_op';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['identifier'] = 'field_farm_pickup_location_target_id';
+  $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -286,20 +272,19 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
     125843996 => 0,
     173712484 => 0,
     196317508 => 0,
-    146437786 => 0,
   );
-  /* Filter criterion: Log: Orders (field_farm_orders:delta) */
-  $handler->display->display_options['filters']['delta']['id'] = 'delta';
-  $handler->display->display_options['filters']['delta']['table'] = 'field_data_field_farm_orders';
-  $handler->display->display_options['filters']['delta']['field'] = 'delta';
-  $handler->display->display_options['filters']['delta']['group'] = 1;
-  $handler->display->display_options['filters']['delta']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['delta']['expose']['operator_id'] = 'delta_op';
-  $handler->display->display_options['filters']['delta']['expose']['label'] = 'Orders #';
-  $handler->display->display_options['filters']['delta']['expose']['description'] = 'Enter a specific order number.';
-  $handler->display->display_options['filters']['delta']['expose']['operator'] = 'delta_op';
-  $handler->display->display_options['filters']['delta']['expose']['identifier'] = 'delta';
-  $handler->display->display_options['filters']['delta']['expose']['remember_roles'] = array(
+  /* Filter criterion: Log: Orders (field_farm_orders) */
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['id'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['field'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['operator_id'] = 'field_farm_orders_target_id_op';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['label'] = 'Order #';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['description'] = 'Enter a specific order number.';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['operator'] = 'field_farm_orders_target_id_op';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['identifier'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['filters']['field_farm_orders_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     30037204 => 0,
@@ -307,7 +292,6 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
     125843996 => 0,
     173712484 => 0,
     196317508 => 0,
-    146437786 => 0,
   );
   /* Filter criterion: Log: Status (field_farm_delivery_status) */
   $handler->display->display_options['filters']['field_farm_delivery_status_value']['id'] = 'field_farm_delivery_status_value';
@@ -336,6 +320,20 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['header']['area_text_custom']['content'] = 'To generate a list of deliveries based on completed orders in the system, use the <a href="/admin/farm/deliveries/generate">Generate Deliveries</a> form.
+
+<ul>
+  <li>Delivery status and date can be changed by selecting the deliveries below and clicking "Change Date/Status".</li>
+  <li>Deliveries can be deleted by selecting them below and clicking "Delete".</li>
+</ul>
+
+You may narrow down the list of deliveries using the fields below. Click "Apply" to apply the filter.';
   $handler->display->display_options['path'] = 'admin/farm/deliveries/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
