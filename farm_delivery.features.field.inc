@@ -165,81 +165,6 @@ function farm_delivery_field_default_fields() {
     ),
   );
 
-  // Exported field: 'log-farm_delivery-field_farm_delivery_items'.
-  $fields['log-farm_delivery-field_farm_delivery_items'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_farm_delivery_items',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '0',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'farm_delivery',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'textformatter',
-          'settings' => array(
-            'textformatter_class' => 'textformatter-list',
-            'textformatter_comma_and' => 0,
-            'textformatter_comma_full_stop' => 0,
-            'textformatter_comma_override' => 0,
-            'textformatter_comma_tag' => 'div',
-            'textformatter_contrib' => array(),
-            'textformatter_separator_custom' => '',
-            'textformatter_separator_custom_class' => 'textformatter-separator',
-            'textformatter_separator_custom_tag' => 'span',
-            'textformatter_term_plain' => 0,
-            'textformatter_type' => 'ul',
-          ),
-          'type' => 'textformatter_list',
-          'weight' => '2',
-        ),
-      ),
-      'entity_type' => 'log',
-      'field_name' => 'field_farm_delivery_items',
-      'label' => 'Items',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'size' => '60',
-        ),
-        'type' => 'text_textfield',
-        'weight' => '2',
-      ),
-    ),
-  );
-
   // Exported field: 'log-farm_delivery-field_farm_delivery_status'.
   $fields['log-farm_delivery-field_farm_delivery_status'] = array(
     'field_config' => array(
@@ -525,7 +450,6 @@ function farm_delivery_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Address');
   t('Date');
-  t('Items');
   t('Notes');
   t('Orders');
   t('Pickup Location');
