@@ -93,11 +93,11 @@ function farm_delivery_generate_form_submit($form, &$form_state) {
   $deliveries = array();
 
   // Ask modules for order items.
-  foreach (module_implements('farm_delivery_order_items') as $module) {
-    $order_items = module_invoke($module, 'farm_delivery_order_items', $form_state);
+  foreach (module_implements('farm_delivery_orders') as $module) {
+    $delivery_orders = module_invoke($module, 'farm_delivery_orders', $form_state);
 
-    // Iterate through the delivery arrays.
-    foreach ($order_items as $order_id => $items) {
+    // Iterate through the delivery orders.
+    foreach ($delivery_orders as $order_id) {
 
       // Load the order.
       $order = commerce_order_load($order_id);
@@ -110,11 +110,6 @@ function farm_delivery_generate_form_submit($form, &$form_state) {
 
       // Set the status to 'pending'.
       $delivery->field_farm_delivery_status[LANGUAGE_NONE][] = array('value' => 'pending');
-
-      // Add all the items.
-      foreach ($items as $item) {
-        $delivery->field_farm_delivery_items[LANGUAGE_NONE][] = array('value' => $item);
-      }
 
       // Add the order id.
       $delivery->field_farm_orders[LANGUAGE_NONE][] = array('target_id' => $order_id);

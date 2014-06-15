@@ -27,12 +27,12 @@ function farm_delivery_menu() {
 }
 
 /**
- * Implements hook_farm_delivery_generate().
+ * Implements hook_farm_delivery_orders().
  */
-function farm_delivery_farm_delivery_order_items($form_state) {
+function farm_delivery_farm_delivery_orders($form_state) {
 
-  // Start an empty deliveries array.
-  $deliveries = array();
+  // Start an empty delivery orders array.
+  $delivery_orders = array();
 
   // Get the cutoff date.
   $cutoff = strtotime($form_state['values']['since']);
@@ -78,10 +78,11 @@ function farm_delivery_farm_delivery_order_items($form_state) {
         continue;
       }
 
-      $deliveries[$order->order_id][] = $line_item->quantity . ' ' . $product->title;
+      // Add the order to the list of delivery orders.
+      $delivery_orders[$order->order_id] = $order->order_id;
     }
   }
 
-  // Return the deliveries.
-  return $deliveries;
+  // Return the delivery orders.
+  return $delivery_orders;
 }
