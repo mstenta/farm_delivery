@@ -54,13 +54,13 @@ function farm_delivery_field_default_fields() {
             'use_widget_handlers' => 1,
           ),
           'type' => 'addressfield_default',
-          'weight' => '4',
+          'weight' => '6',
         ),
       ),
       'entity_type' => 'log',
       'field_name' => 'field_farm_address',
       'label' => 'Address',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -229,6 +229,107 @@ function farm_delivery_field_default_fields() {
     ),
   );
 
+  // Exported field: 'log-farm_delivery-field_farm_geofield'.
+  $fields['log-farm_delivery-field_farm_geofield'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_farm_geofield',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'bbox' => array(
+          0 => 'top',
+          1 => 'bottom',
+          2 => 'left',
+          3 => 'right',
+        ),
+        'bottom' => array(
+          0 => 'bottom',
+        ),
+        'centroid' => array(
+          0 => 'lat',
+          1 => 'lon',
+        ),
+        'geohash' => array(
+          0 => 'geohash',
+        ),
+        'lat' => array(
+          0 => 'lat',
+        ),
+        'left' => array(
+          0 => 'left',
+        ),
+        'lon' => array(
+          0 => 'lon',
+        ),
+        'right' => array(
+          0 => 'right',
+        ),
+        'top' => array(
+          0 => 'top',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'geofield',
+      'settings' => array(
+        'backend' => 'default',
+        'srid' => '4326',
+      ),
+      'translatable' => '0',
+      'type' => 'geofield',
+    ),
+    'field_instance' => array(
+      'bundle' => 'farm_delivery',
+      'default_value' => array(),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'geofield',
+          'settings' => array(
+            'data' => 'full',
+            'map_preset' => 'farm_map_geofield',
+          ),
+          'type' => 'geofield_openlayers',
+          'weight' => '8',
+        ),
+      ),
+      'entity_type' => 'log',
+      'field_name' => 'field_farm_geofield',
+      'label' => 'Location',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'geocoder',
+        'settings' => array(
+          'delta_handling' => 'default',
+          'geocoder_field' => 'field_farm_address',
+          'geocoder_handler' => 'google',
+          'handler_settings' => array(
+            'google' => array(
+              'all_results' => 0,
+              'geometry_type' => 'point',
+              'reject_results' => array(
+                'APPROXIMATE' => 0,
+                'GEOMETRIC_CENTER' => 0,
+                'RANGE_INTERPOLATED' => 0,
+                'ROOFTOP' => 0,
+              ),
+            ),
+          ),
+        ),
+        'type' => 'geocoder',
+        'weight' => '5',
+      ),
+    ),
+  );
+
   // Exported field: 'log-farm_delivery-field_farm_notes'.
   $fields['log-farm_delivery-field_farm_notes'] = array(
     'field_config' => array(
@@ -267,7 +368,7 @@ function farm_delivery_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '5',
+          'weight' => '7',
         ),
       ),
       'entity_type' => 'log',
@@ -285,7 +386,7 @@ function farm_delivery_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -346,7 +447,7 @@ function farm_delivery_field_default_fields() {
             'link' => 1,
           ),
           'type' => 'entityreference_label',
-          'weight' => '3',
+          'weight' => '5',
         ),
       ),
       'entity_type' => 'log',
@@ -365,7 +466,7 @@ function farm_delivery_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete_tags',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -426,7 +527,7 @@ function farm_delivery_field_default_fields() {
             'link' => 1,
           ),
           'type' => 'entityreference_label',
-          'weight' => '3',
+          'weight' => '4',
         ),
       ),
       'entity_type' => 'log',
@@ -450,6 +551,7 @@ function farm_delivery_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Address');
   t('Date');
+  t('Location');
   t('Notes');
   t('Orders');
   t('Pickup Location');

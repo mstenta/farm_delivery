@@ -250,7 +250,6 @@ function farm_delivery_views_default_views() {
     125843996 => 0,
     173712484 => 0,
     196317508 => 0,
-    146437786 => 0,
   );
   $handler->display->display_options['filters']['field_farm_date_value']['form_type'] = 'date_popup';
   /* Filter criterion: Log: Pickup Location (field_farm_pickup_location) */
@@ -344,6 +343,127 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['tab_options']['type'] = 'tab';
   $handler->display->display_options['tab_options']['title'] = 'Deliveries';
   $handler->display->display_options['tab_options']['weight'] = '0';
+
+  /* Display: Attachment */
+  $handler = $view->new_display('attachment', 'Attachment', 'attachment_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'openlayers_map';
+  $handler->display->display_options['style_options']['map'] = 'farm_map_deliveries';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Log: Log ID */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'log';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'ID';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'log/[id]';
+  /* Field: Log: Date */
+  $handler->display->display_options['fields']['field_farm_date']['id'] = 'field_farm_date';
+  $handler->display->display_options['fields']['field_farm_date']['table'] = 'field_data_field_farm_date';
+  $handler->display->display_options['fields']['field_farm_date']['field'] = 'field_farm_date';
+  $handler->display->display_options['fields']['field_farm_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  /* Field: Log: Pickup Location */
+  $handler->display->display_options['fields']['field_farm_pickup_location']['id'] = 'field_farm_pickup_location';
+  $handler->display->display_options['fields']['field_farm_pickup_location']['table'] = 'field_data_field_farm_pickup_location';
+  $handler->display->display_options['fields']['field_farm_pickup_location']['field'] = 'field_farm_pickup_location';
+  $handler->display->display_options['fields']['field_farm_pickup_location']['settings'] = array(
+    'link' => 1,
+  );
+  /* Field: Log: Address */
+  $handler->display->display_options['fields']['field_farm_address']['id'] = 'field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['table'] = 'field_data_field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['field'] = 'field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_farm_address']['settings'] = array(
+    'use_widget_handlers' => 1,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Log: Orders */
+  $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['label'] = 'Order';
+  $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
+  /* Field: Log: Status */
+  $handler->display->display_options['fields']['field_farm_delivery_status']['id'] = 'field_farm_delivery_status';
+  $handler->display->display_options['fields']['field_farm_delivery_status']['table'] = 'field_data_field_farm_delivery_status';
+  $handler->display->display_options['fields']['field_farm_delivery_status']['field'] = 'field_farm_delivery_status';
+  $handler->display->display_options['displays'] = array(
+    'page_1' => 'page_1',
+    'default' => 0,
+  );
+  $handler->display->display_options['attachment_position'] = 'after';
+  $handler->display->display_options['inherit_exposed_filters'] = TRUE;
+
+  /* Display: OpenLayers Data Overlay */
+  $handler = $view->new_display('openlayers', 'OpenLayers Data Overlay', 'openlayers_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'openlayers_data';
+  $handler->display->display_options['style_options']['data_source'] = array(
+    'value' => 'wkt',
+    'other_lat' => 'field_farm_geofield',
+    'other_lon' => 'field_farm_geofield',
+    'wkt' => 'field_farm_geofield',
+    'other_top' => 'field_farm_geofield',
+    'other_right' => 'field_farm_geofield',
+    'other_bottom' => 'field_farm_geofield',
+    'other_left' => 'field_farm_geofield',
+    'name_field' => 'field_farm_orders',
+    'description_field' => 'field_farm_address',
+    'style_field' => '',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field: Location */
+  $handler->display->display_options['fields']['field_farm_geofield']['id'] = 'field_farm_geofield';
+  $handler->display->display_options['fields']['field_farm_geofield']['table'] = 'field_data_field_farm_geofield';
+  $handler->display->display_options['fields']['field_farm_geofield']['field'] = 'field_farm_geofield';
+  $handler->display->display_options['fields']['field_farm_geofield']['click_sort_column'] = 'geom';
+  $handler->display->display_options['fields']['field_farm_geofield']['settings'] = array(
+    'data' => 'full',
+  );
+  $handler->display->display_options['fields']['field_farm_geofield']['delta_offset'] = '0';
+  /* Field: Log: Address */
+  $handler->display->display_options['fields']['field_farm_address']['id'] = 'field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['table'] = 'field_data_field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['field'] = 'field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_farm_address']['settings'] = array(
+    'use_widget_handlers' => 1,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Log: Orders */
+  $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
+  $handler->display->display_options['fields']['field_farm_orders']['label'] = 'Order';
+  $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
   $export['farm_deliveries'] = $view;
 
   return $export;
