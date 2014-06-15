@@ -31,7 +31,7 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -140,11 +140,10 @@ function farm_delivery_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Update Date/Status',
+      'label' => 'Update Status',
       'settings' => array(
         'show_all_tokens' => 0,
         'display_values' => array(
-          'farm_delivery::field_farm_date' => 'farm_delivery::field_farm_date',
           'farm_delivery::field_farm_delivery_status' => 'farm_delivery::field_farm_delivery_status',
         ),
       ),
@@ -173,6 +172,12 @@ function farm_delivery_views_default_views() {
       'label' => '',
     ),
   );
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = '#';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   /* Field: Log: Log ID */
   $handler->display->display_options['fields']['id']['id'] = 'id';
   $handler->display->display_options['fields']['id']['table'] = 'log';
@@ -337,7 +342,7 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['content'] = 'To generate a list of deliveries based on completed orders in the system, use the <a href="/admin/farm/deliveries/generate">Generate Deliveries</a> form.
 
 <ul>
-  <li>Delivery status and date can be changed by selecting the deliveries below and clicking "Change Date/Status".</li>
+  <li>Delivery status can be changed by selecting the deliveries below and clicking "Update Status".</li>
   <li>Deliveries can be deleted by selecting them below and clicking "Delete".</li>
 </ul>
 
@@ -448,6 +453,8 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['fields']['field_farm_geofield']['id'] = 'field_farm_geofield';
   $handler->display->display_options['fields']['field_farm_geofield']['table'] = 'field_data_field_farm_geofield';
   $handler->display->display_options['fields']['field_farm_geofield']['field'] = 'field_farm_geofield';
+  $handler->display->display_options['fields']['field_farm_geofield']['label'] = '';
+  $handler->display->display_options['fields']['field_farm_geofield']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_farm_geofield']['click_sort_column'] = 'geom';
   $handler->display->display_options['fields']['field_farm_geofield']['settings'] = array(
     'data' => 'full',
@@ -457,6 +464,8 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['fields']['field_farm_address']['id'] = 'field_farm_address';
   $handler->display->display_options['fields']['field_farm_address']['table'] = 'field_data_field_farm_address';
   $handler->display->display_options['fields']['field_farm_address']['field'] = 'field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address']['label'] = '';
+  $handler->display->display_options['fields']['field_farm_address']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_farm_address']['click_sort_column'] = 'country';
   $handler->display->display_options['fields']['field_farm_address']['settings'] = array(
     'use_widget_handlers' => 1,
@@ -468,7 +477,8 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
   $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
   $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['label'] = 'Order';
+  $handler->display->display_options['fields']['field_farm_orders']['label'] = '';
+  $handler->display->display_options['fields']['field_farm_orders']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
     'link' => 1,
   );
