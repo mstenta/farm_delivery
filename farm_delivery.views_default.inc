@@ -38,16 +38,24 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
+    'counter' => 'counter',
     'id' => 'id',
     'field_farm_date' => 'field_farm_date',
+    'commerce_customer_address_name_line' => 'commerce_customer_address_name_line',
+    'field_phone' => 'field_phone',
     'field_farm_pickup_location' => 'field_farm_pickup_location',
-    'field_farm_address' => 'field_farm_address',
     'field_farm_orders' => 'field_farm_orders',
+    'commerce_line_items' => 'commerce_line_items',
     'field_farm_delivery_status' => 'field_farm_delivery_status',
   );
   $handler->display->display_options['style_options']['default'] = 'field_farm_date';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'counter' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -66,6 +74,20 @@ function farm_delivery_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'commerce_customer_address_name_line' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_phone' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_farm_pickup_location' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -73,14 +95,12 @@ function farm_delivery_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_farm_address' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
+    'field_farm_orders' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_farm_orders' => array(
+    'commerce_line_items' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -105,6 +125,12 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['relationships']['field_farm_orders_target_id']['table'] = 'field_data_field_farm_orders';
   $handler->display->display_options['relationships']['field_farm_orders_target_id']['field'] = 'field_farm_orders_target_id';
   $handler->display->display_options['relationships']['field_farm_orders_target_id']['label'] = 'Commerce Order';
+  /* Relationship: Commerce Order: Referenced customer profile */
+  $handler->display->display_options['relationships']['commerce_customer_shipping_profile_id']['id'] = 'commerce_customer_shipping_profile_id';
+  $handler->display->display_options['relationships']['commerce_customer_shipping_profile_id']['table'] = 'field_data_commerce_customer_shipping';
+  $handler->display->display_options['relationships']['commerce_customer_shipping_profile_id']['field'] = 'commerce_customer_shipping_profile_id';
+  $handler->display->display_options['relationships']['commerce_customer_shipping_profile_id']['relationship'] = 'field_farm_orders_target_id';
+  $handler->display->display_options['relationships']['commerce_customer_shipping_profile_id']['label'] = 'Shipping profile';
   /* Field: Bulk operations: Log */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'log';
@@ -178,13 +204,6 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = '#';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
-  /* Field: Log: Log ID */
-  $handler->display->display_options['fields']['id']['id'] = 'id';
-  $handler->display->display_options['fields']['id']['table'] = 'log';
-  $handler->display->display_options['fields']['id']['field'] = 'id';
-  $handler->display->display_options['fields']['id']['label'] = 'ID';
-  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['id']['alter']['path'] = 'log/[id]';
   /* Field: Log: Date */
   $handler->display->display_options['fields']['field_farm_date']['id'] = 'field_farm_date';
   $handler->display->display_options['fields']['field_farm_date']['table'] = 'field_data_field_farm_date';
@@ -197,23 +216,24 @@ function farm_delivery_views_default_views() {
     'multiple_to' => '',
     'show_repeat_rule' => 'show',
   );
+  /* Field: Commerce Customer profile: Address - Full name */
+  $handler->display->display_options['fields']['commerce_customer_address_name_line']['id'] = 'commerce_customer_address_name_line';
+  $handler->display->display_options['fields']['commerce_customer_address_name_line']['table'] = 'field_data_commerce_customer_address';
+  $handler->display->display_options['fields']['commerce_customer_address_name_line']['field'] = 'commerce_customer_address_name_line';
+  $handler->display->display_options['fields']['commerce_customer_address_name_line']['relationship'] = 'commerce_customer_shipping_profile_id';
+  $handler->display->display_options['fields']['commerce_customer_address_name_line']['label'] = 'Name';
+  /* Field: Commerce Customer profile: Phone Number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['relationship'] = 'commerce_customer_shipping_profile_id';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Phone';
   /* Field: Log: Pickup Location */
   $handler->display->display_options['fields']['field_farm_pickup_location']['id'] = 'field_farm_pickup_location';
   $handler->display->display_options['fields']['field_farm_pickup_location']['table'] = 'field_data_field_farm_pickup_location';
   $handler->display->display_options['fields']['field_farm_pickup_location']['field'] = 'field_farm_pickup_location';
   $handler->display->display_options['fields']['field_farm_pickup_location']['settings'] = array(
     'link' => 1,
-  );
-  /* Field: Log: Address */
-  $handler->display->display_options['fields']['field_farm_address']['id'] = 'field_farm_address';
-  $handler->display->display_options['fields']['field_farm_address']['table'] = 'field_data_field_farm_address';
-  $handler->display->display_options['fields']['field_farm_address']['field'] = 'field_farm_address';
-  $handler->display->display_options['fields']['field_farm_address']['click_sort_column'] = 'country';
-  $handler->display->display_options['fields']['field_farm_address']['settings'] = array(
-    'use_widget_handlers' => 1,
-    'format_handlers' => array(
-      'address' => 'address',
-    ),
   );
   /* Field: Log: Orders */
   $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
@@ -266,6 +286,27 @@ function farm_delivery_views_default_views() {
     196317508 => 0,
   );
   $handler->display->display_options['filters']['field_farm_date_value']['form_type'] = 'date_popup';
+  /* Filter criterion: Commerce Customer profile: Address - Full name */
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['id'] = 'commerce_customer_address_name_line';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['table'] = 'field_data_commerce_customer_address';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['field'] = 'commerce_customer_address_name_line';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['relationship'] = 'commerce_customer_shipping_profile_id';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['operator'] = 'contains';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['group'] = 1;
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['operator_id'] = 'commerce_customer_address_name_line_op';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['operator'] = 'commerce_customer_address_name_line_op';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['identifier'] = 'commerce_customer_address_name_line';
+  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    30037204 => 0,
+    200153887 => 0,
+    125843996 => 0,
+    173712484 => 0,
+    196317508 => 0,
+  );
   /* Filter criterion: Log: Pickup Location (field_farm_pickup_location) */
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['id'] = 'field_farm_pickup_location_target_id';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['table'] = 'field_data_field_farm_pickup_location';
@@ -438,7 +479,7 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
     'other_right' => 'field_farm_geofield',
     'other_bottom' => 'field_farm_geofield',
     'other_left' => 'field_farm_geofield',
-    'name_field' => 'field_farm_orders',
+    'name_field' => 'field_farm_address_name_line',
     'description_field' => 'field_farm_address',
     'style_field' => '',
   );
@@ -473,16 +514,11 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
       'address' => 'address',
     ),
   );
-  /* Field: Log: Orders */
-  $handler->display->display_options['fields']['field_farm_orders']['id'] = 'field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['table'] = 'field_data_field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['field'] = 'field_farm_orders';
-  $handler->display->display_options['fields']['field_farm_orders']['label'] = '';
-  $handler->display->display_options['fields']['field_farm_orders']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_farm_orders']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_farm_orders']['delta_offset'] = '0';
+  /* Field: Log: Address - Full name */
+  $handler->display->display_options['fields']['field_farm_address_name_line']['id'] = 'field_farm_address_name_line';
+  $handler->display->display_options['fields']['field_farm_address_name_line']['table'] = 'field_data_field_farm_address';
+  $handler->display->display_options['fields']['field_farm_address_name_line']['field'] = 'field_farm_address_name_line';
+  $handler->display->display_options['fields']['field_farm_address_name_line']['label'] = 'Name';
   $export['farm_deliveries'] = $view;
 
   return $export;
