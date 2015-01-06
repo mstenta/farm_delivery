@@ -380,7 +380,7 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['header']['area_text_custom']['content'] = 'To generate a list of deliveries based on completed orders in the system, use the <a href="/admin/farm/deliveries/generate">Generate Deliveries</a> form.
+  $handler->display->display_options['header']['area_text_custom']['content'] = 'To generate a list of deliveries based on completed orders in the system, use the <a href="/farm/deliveries/generate">Generate Deliveries</a> form.
 
 <ul>
   <li>Delivery status can be changed by selecting the deliveries below and clicking "Update Status".</li>
@@ -388,7 +388,7 @@ function farm_delivery_views_default_views() {
 </ul>
 
 You may narrow down the list of deliveries using the fields below. Click "Apply" to apply the filter.';
-  $handler->display->display_options['path'] = 'admin/farm/deliveries/list';
+  $handler->display->display_options['path'] = 'farm/deliveries/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['weight'] = '0';

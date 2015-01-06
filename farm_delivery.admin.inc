@@ -15,7 +15,7 @@ function farm_delivery_generate_form($form, &$form_state) {
   // Overview.
   $form['overview'] = array(
     '#type' => 'markup',
-    '#markup' => t('<p>Use the form below to generate a list of deliveries. These deliveries will appear in the <a href="@deliveries">Farm Deliveries</a> list.</p><p>Deliveries will be generated based on completed orders in the system, using the options below.</p>', array('@deliveries' => '/admin/farm/deliveries')),
+    '#markup' => t('<p>Use the form below to generate a list of deliveries. These deliveries will appear in the <a href="@deliveries">Farm Deliveries</a> list.</p><p>Deliveries will be generated based on completed orders in the system, using the options below.</p>', array('@deliveries' => '/farm/deliveries')),
   );
 
   // Delivery date.
@@ -173,5 +173,5 @@ function farm_delivery_generate_form_submit($form, &$form_state) {
   }
 
   // Redirect to the deliveries list.
-  $form_state['redirect'] = 'admin/farm/deliveries';
+  $form_state['redirect'] = 'farm/deliveries';
 }

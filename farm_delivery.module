@@ -12,7 +12,7 @@ include_once 'farm_delivery.features.inc';
 function farm_delivery_menu() {
   $items = array();
 
-  $items['admin/farm/deliveries/generate'] = array(
+  $items['farm/deliveries/generate'] = array(
     'title' => 'Generate',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('farm_delivery_generate_form'),
