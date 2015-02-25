@@ -469,13 +469,13 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
     'other_lat' => 'field_farm_geofield',
     'other_lon' => 'field_farm_geofield',
     'wkt' => 'field_farm_geofield',
+    'projection' => 'EPSG:4326',
     'other_top' => 'field_farm_geofield',
     'other_right' => 'field_farm_geofield',
     'other_bottom' => 'field_farm_geofield',
     'other_left' => 'field_farm_geofield',
     'name_field' => 'field_farm_address_name_line',
     'description_field' => 'field_farm_address',
-    'style_field' => '',
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
