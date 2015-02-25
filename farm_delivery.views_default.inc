@@ -39,8 +39,7 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'counter' => 'counter',
-    'id' => 'id',
-    'field_farm_date' => 'field_farm_date',
+    'timestamp' => 'timestamp',
     'commerce_customer_address_name_line' => 'commerce_customer_address_name_line',
     'field_phone' => 'field_phone',
     'field_farm_pickup_location' => 'field_farm_pickup_location',
@@ -48,7 +47,7 @@ function farm_delivery_views_default_views() {
     'commerce_line_items' => 'commerce_line_items',
     'field_farm_delivery_status' => 'field_farm_delivery_status',
   );
-  $handler->display->display_options['style_options']['default'] = 'field_farm_date';
+  $handler->display->display_options['style_options']['default'] = 'timestamp';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
       'align' => '',
@@ -60,14 +59,7 @@ function farm_delivery_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'id' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_farm_date' => array(
+    'timestamp' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -204,18 +196,13 @@ function farm_delivery_views_default_views() {
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = '#';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
-  /* Field: Log: Date */
-  $handler->display->display_options['fields']['field_farm_date']['id'] = 'field_farm_date';
-  $handler->display->display_options['fields']['field_farm_date']['table'] = 'field_data_field_farm_date';
-  $handler->display->display_options['fields']['field_farm_date']['field'] = 'field_farm_date';
-  $handler->display->display_options['fields']['field_farm_date']['settings'] = array(
-    'format_type' => 'short',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_repeat_rule' => 'show',
-  );
+  /* Field: Log: Timestamp */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'log';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'M j Y';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
   /* Field: Commerce Customer profile: Address - Full name */
   $handler->display->display_options['fields']['commerce_customer_address_name_line']['id'] = 'commerce_customer_address_name_line';
   $handler->display->display_options['fields']['commerce_customer_address_name_line']['table'] = 'field_data_commerce_customer_address';
@@ -265,48 +252,6 @@ function farm_delivery_views_default_views() {
     'farm_delivery' => 'farm_delivery',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Log: Date (field_farm_date) */
-  $handler->display->display_options['filters']['field_farm_date_value']['id'] = 'field_farm_date_value';
-  $handler->display->display_options['filters']['field_farm_date_value']['table'] = 'field_data_field_farm_date';
-  $handler->display->display_options['filters']['field_farm_date_value']['field'] = 'field_farm_date_value';
-  $handler->display->display_options['filters']['field_farm_date_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_farm_date_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['operator_id'] = 'field_farm_date_value_op';
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['label'] = 'Date';
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['operator'] = 'field_farm_date_value_op';
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['identifier'] = 'field_farm_date_value';
-  $handler->display->display_options['filters']['field_farm_date_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    30037204 => 0,
-    200153887 => 0,
-    125843996 => 0,
-    173712484 => 0,
-    196317508 => 0,
-  );
-  $handler->display->display_options['filters']['field_farm_date_value']['form_type'] = 'date_popup';
-  /* Filter criterion: Commerce Customer profile: Address - Full name */
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['id'] = 'commerce_customer_address_name_line';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['table'] = 'field_data_commerce_customer_address';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['field'] = 'commerce_customer_address_name_line';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['relationship'] = 'commerce_customer_shipping_profile_id';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['operator'] = 'contains';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['group'] = 1;
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['operator_id'] = 'commerce_customer_address_name_line_op';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['label'] = 'Name';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['operator'] = 'commerce_customer_address_name_line_op';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['identifier'] = 'commerce_customer_address_name_line';
-  $handler->display->display_options['filters']['commerce_customer_address_name_line']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    30037204 => 0,
-    200153887 => 0,
-    125843996 => 0,
-    173712484 => 0,
-    196317508 => 0,
-  );
   /* Filter criterion: Log: Pickup Location (field_farm_pickup_location) */
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['id'] = 'field_farm_pickup_location_target_id';
   $handler->display->display_options['filters']['field_farm_pickup_location_target_id']['table'] = 'field_data_field_farm_pickup_location';
@@ -371,6 +316,55 @@ function farm_delivery_views_default_views() {
     196317508 => 0,
     146437786 => 0,
   );
+  /* Filter criterion: Date: Date (log) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'log';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = '>=';
+  $handler->display->display_options['filters']['date_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['date_filter']['expose']['operator_id'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['label'] = 'Start date';
+  $handler->display->display_options['filters']['date_filter']['expose']['operator'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['identifier'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    30037204 => 0,
+    200153887 => 0,
+    125843996 => 0,
+    173712484 => 0,
+    196317508 => 0,
+    146437786 => 0,
+    249025871 => 0,
+  );
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'log.timestamp' => 'log.timestamp',
+  );
+  /* Filter criterion: Date: Date (log) */
+  $handler->display->display_options['filters']['date_filter_1']['id'] = 'date_filter_1';
+  $handler->display->display_options['filters']['date_filter_1']['table'] = 'log';
+  $handler->display->display_options['filters']['date_filter_1']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['date_filter_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['date_filter_1']['expose']['operator_id'] = 'date_filter_1_op';
+  $handler->display->display_options['filters']['date_filter_1']['expose']['label'] = 'End date';
+  $handler->display->display_options['filters']['date_filter_1']['expose']['operator'] = 'date_filter_1_op';
+  $handler->display->display_options['filters']['date_filter_1']['expose']['identifier'] = 'date_filter_1';
+  $handler->display->display_options['filters']['date_filter_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    30037204 => 0,
+    200153887 => 0,
+    125843996 => 0,
+    173712484 => 0,
+    196317508 => 0,
+    146437786 => 0,
+    249025871 => 0,
+  );
+  $handler->display->display_options['filters']['date_filter_1']['date_fields'] = array(
+    'log.timestamp' => 'log.timestamp',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
@@ -416,7 +410,7 @@ You may narrow down the list of deliveries using the fields below. Click "Apply"
   $handler->display->display_options['fields']['id']['label'] = 'ID';
   $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['id']['alter']['path'] = 'log/[id]';
-  /* Field: Log: Date */
+  /* Field: Field: Date */
   $handler->display->display_options['fields']['field_farm_date']['id'] = 'field_farm_date';
   $handler->display->display_options['fields']['field_farm_date']['table'] = 'field_data_field_farm_date';
   $handler->display->display_options['fields']['field_farm_date']['field'] = 'field_farm_date';
