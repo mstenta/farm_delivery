@@ -27,6 +27,7 @@ features[ctools][] = openlayers:openlayers_maps:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[field][] = log-farm_delivery-field_farm_address
+features[field][] = log-farm_delivery-field_farm_delivery_items
 features[field][] = log-farm_delivery-field_farm_delivery_status
 features[field][] = log-farm_delivery-field_farm_geofield
 features[field][] = log-farm_delivery-field_farm_notes
