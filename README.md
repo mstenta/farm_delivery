@@ -12,15 +12,10 @@ them.
 
 A hook is provided for other modules to add delivery
 information: hook_farm_delivery_orders() (see farm_delivery.api.php).
-This is used by [Farm CSA](http://drupal.org/project/farm_csa) to add CSA
-deliveries.
 
 Optionally integrates with
 [Commerce Pickup](http://drupal.org/project/commerce_pickup) for setting the
 delivery location to a pickup location.
-
-This module is part of the [FarmOS](http://drupal.org/project/farm)
-distribution.
 
 DEPENDENCIES
 ------------
