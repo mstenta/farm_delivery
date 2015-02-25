@@ -31,6 +31,7 @@ function farm_delivery_default_log_type() {
     "label" : "Delivery",
     "weight" : 0,
     "name_pattern" : "Delivery [log:id]",
+    "name_edit" : "0",
     "rdf_mapping" : []
   }');
   return $items;
