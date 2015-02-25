@@ -38,7 +38,6 @@ This module depends on the following modules:
  * Geofield (http://drupal.org/project/geofield)
  * Log (http://drupal.org/project/log)
  * OpenLayers (http://drupal.org/project/openlayers)
- * Strongarm (http://drupal.org/project/strongarm)
  * Text List Formatter (http://drupal.org/project/textformatter)
  * Views (http://drupal.org/project/views)
  * Views Bulk Operations (http://drupal.org/project/views_bulk_operations)
